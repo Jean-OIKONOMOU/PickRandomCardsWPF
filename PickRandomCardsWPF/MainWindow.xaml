@@ -17,8 +17,10 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="UserInput" TextWrapping="Wrap" Text="TextBox" Grid.Row="2" VerticalAlignment="Center" KeyDown="OnKeyDownHandler" Margin="70,0,70,0" 
-          FontSize="20" FontFamily="Consolas"/>
-        <TextBlock x:Name="ReadOnlyText" TextWrapping="Wrap" Text="TextBlock" Grid.Row="1" TextAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+        <ListBox Name="ReadOnlyListBox" Grid.Row="1" Margin="30,30,30,30" Grid.Column="1" Grid.RowSpan="2">
+        </ListBox>
+        <TextBox x:Name="UserInput" TextWrapping="Wrap" Text="Write here" Grid.Row="2" VerticalAlignment="Center" KeyDown="OnKeyDownHandler" Margin="70,0,70,0" 
+          FontSize="20" FontFamily="Consolas" GotKeyboardFocus="ReadOnlyText_RemovePlaceHolderText"/>
+        <TextBlock x:Name="ReadOnlyText" TextWrapping="Wrap" Text="TextBlock" Grid.Row="1" TextAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="20" Height="100"/>
     </Grid>
 </Window>

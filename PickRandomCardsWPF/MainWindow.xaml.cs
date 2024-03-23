@@ -29,8 +29,11 @@ namespace PickRandomCardsWPF
         private void SetUpCardPicker()
         {
             mainGrid.Background = new SolidColorBrush(Colors.Black);
+
             ReadOnlyText.Background = new SolidColorBrush(Colors.Black);
             ReadOnlyText.Foreground = new SolidColorBrush(Colors.LawnGreen);
+            ReadOnlyText.Text = "Hello, master. How many cards would you like ?";
+
             UserInput.Background = new SolidColorBrush(Colors.Black);
             UserInput.Foreground = new SolidColorBrush(Colors.LawnGreen);
         }
@@ -40,13 +43,50 @@ namespace PickRandomCardsWPF
             TextBox textBox = sender as TextBox;
             if (e.Key == Key.Return)
             {
-                ProcessCommand(textBox.Text);
+                //ProcessCommand(textBox.Text);
+                GenerateDeck(textBox.Text);
             }
         }
 
-        private void ProcessCommand(string text)
+        private void GenerateDeck(string text)
         {
-            ReadOnlyText.Text = text;
+            ReadOnlyListBox.Items.Clear();
+            if (text == null)
+            {
+                text = "1";
+            }
+
+            if (int.TryParse(text, out int id))
+            {
+                string[] deck = CardPicker.PickSomeCards(id);
+                foreach (var card in deck)
+                {
+                    ReadOnlyListBox.Items.Add(card);
+                }
+                ReadOnlyText.Text = $"Here is your {deck.Length} card deck, master. Write another digit if you want to generate another deck.";
+            } else
+            {
+                ReadOnlyText.Text = "Master, please input a digit.";
+            }
+        }
+
+        //private void ReadOnlyText_RemovePlaceHolderText(object sender, MouseButtonEventArgs e)
+        //{
+        //    TextBox textBox = sender as TextBox;
+        //    Console.WriteLine("click");
+        //    if (textBox.Text == "Write here")
+        //    {
+        //        textBox.Text = " ";
+        //    }
+        //}
+
+        private void ReadOnlyText_RemovePlaceHolderText(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (textBox.Text == "Write here")
+            {
+                textBox.Text = string.Empty;
+            }
         }
     }
 }
