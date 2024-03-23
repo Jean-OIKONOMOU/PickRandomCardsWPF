@@ -24,14 +24,14 @@ namespace PickRandomCardsWPF
 
         static string RandomValue()
         {
-            int rand = Random.Next(1, 13);
+            int rand = Random.Next(0, 13);
             string[] cardValues = {"Ace", "Two", "Three", "Four", "Five", "Six", "Seven",
                                    "Eight", "Nine", "Ten", "Jack", "Queen", "King"};
             return cardValues[rand];
         }
         static string RandomSuit()
         {
-            int rand = Random.Next(1, 4);
+            int rand = Random.Next(0, 4);
             string[] cardSuits = { "of Spades", "of Clubs", "of Hearts", "of Diamonds" };
             return cardSuits[rand];
         }

@@ -32,7 +32,7 @@ namespace PickRandomCardsWPF
 
             ReadOnlyText.Background = new SolidColorBrush(Colors.Black);
             ReadOnlyText.Foreground = new SolidColorBrush(Colors.LawnGreen);
-            ReadOnlyText.Text = "Hello, master. How many cards would you like ?";
+            ReadOnlyText.Text = "Hello, master. How many cards would you like ? The maximum number of cards you can ask for is 52.";
 
             UserInput.Background = new SolidColorBrush(Colors.Black);
             UserInput.Foreground = new SolidColorBrush(Colors.LawnGreen);
@@ -58,27 +58,22 @@ namespace PickRandomCardsWPF
 
             if (int.TryParse(text, out int id))
             {
+                if (id <= 52)
+                {
                 string[] deck = CardPicker.PickSomeCards(id);
                 foreach (var card in deck)
                 {
                     ReadOnlyListBox.Items.Add(card);
                 }
                 ReadOnlyText.Text = $"Here is your {deck.Length} card deck, master. Write another digit if you want to generate another deck.";
-            } else
-            {
-                ReadOnlyText.Text = "Master, please input a digit.";
+
+                } else {
+                    ReadOnlyText.Text = "Master, please input a digit equal, or smaller, than 52.";
+                }
+            } else {
+                ReadOnlyText.Text = "Master, please input a digit equal, or smaller, than 52.";
             }
         }
-
-        //private void ReadOnlyText_RemovePlaceHolderText(object sender, MouseButtonEventArgs e)
-        //{
-        //    TextBox textBox = sender as TextBox;
-        //    Console.WriteLine("click");
-        //    if (textBox.Text == "Write here")
-        //    {
-        //        textBox.Text = " ";
-        //    }
-        //}
 
         private void ReadOnlyText_RemovePlaceHolderText(object sender, KeyboardFocusChangedEventArgs e)
         {
